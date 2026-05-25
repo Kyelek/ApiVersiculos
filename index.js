@@ -12,9 +12,9 @@ const port = process.env.PORT || 3000;
 
 // Configuración de CORS
 const corsOptions = {
-  origin: 'https://web-versiculos-aleatorios.vercel.app', 
+  origin: '*', 
   methods: ['GET', 'POST'],
-  optionsSuccessStatus: 200
+  allowedHeaders: ['Content-Type']
 };
 
 app.use(cors(corsOptions));
