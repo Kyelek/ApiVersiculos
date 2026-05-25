@@ -10,8 +10,14 @@ const swaggerDefinition = require('./swagger.js');
 
 const port = process.env.PORT || 3000;
 
-// 2. Habilita CORS ANTES de definir las rutas
-app.use(cors());
+// Configuración de CORS
+const corsOptions = {
+  origin: 'https://web-versiculos-aleatorios.vercel.app', 
+  methods: ['GET', 'POST'],
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 var options = {
   swaggerDefinition,
