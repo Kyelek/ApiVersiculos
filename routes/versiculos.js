@@ -4,10 +4,15 @@ const Database = require("sqlite");
 const sqlite3 = require('sqlite3'); // Driver necesario
 const constants = require("../constants.js");
 const queries = require("../queries.js");
-
+const cors = require('cors');
 /**
  * Ruta: /versiculos/:abreviatura
  */
+router.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 router.get("/:abreviatura", async (req, res) => {
   const abreviatura = req.params.abreviatura.toUpperCase();  
   try {

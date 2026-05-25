@@ -5,6 +5,16 @@ const sqlite3 = require('sqlite3'); // Necesario para el driver
 const constants = require("../constants.js");
 const queries = require("../queries.js");
 
+
+const cors = require('cors');
+/**
+ * Ruta: /versiculos/:abreviatura
+ */
+router.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type']
+}));
 /**
  * Ruta para obtener todos los libros
  */
