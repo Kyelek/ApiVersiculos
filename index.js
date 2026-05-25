@@ -1,15 +1,17 @@
 const express = require("express");
 const app = express();
-const Database = require("sqlite-async");
+const cors = require("cors"); // 1. Importa CORS
+const Database = require("sqlite");
 const swaggerUi = require('swagger-ui-express');
 const swaggerJSDoc = require('swagger-jsdoc');
-
-
 const constants = require("./constants.js");
 const routes = require('./routes.js');
-const swaggerDefinition  = require('./swagger.js');
+const swaggerDefinition = require('./swagger.js');
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
+
+// 2. Habilita CORS ANTES de definir las rutas
+app.use(cors());
 
 var options = {
   swaggerDefinition,
@@ -18,8 +20,9 @@ var options = {
 
 const swaggerSpec = swaggerJSDoc(options);
 
+// 3. Rutas
 app.use("/", routes);
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec)); // He cambiado la ruta para que no solape todo
 
 app.listen(port, () =>
   console.log(`BibliAPI listening at http://localhost:${port}`)
